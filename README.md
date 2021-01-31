@@ -1,5 +1,8 @@
 # storage-management
-Application for managing items in storage.
+Application for managing items in storage using WPF with MVVM design pattern
 
+#Main window
+![MainWindow](https://user-images.githubusercontent.com/45886346/106384602-6c87fc80-63d4-11eb-9f72-2ca73dcdf9e8.png)
 
-![Image1](https://user-images.githubusercontent.com/45886346/106384398-56c60780-63d3-11eb-80ce-afd829819e19.png)
+#Updated
+![Updated](https://user-images.githubusercontent.com/45886346/106384612-76a9fb00-63d4-11eb-9fca-acb86a2c734d.png)
