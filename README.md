@@ -1,2 +1,2 @@
 # storage-management
-Application for managin items in storage.
+Application for managing items in storage.
