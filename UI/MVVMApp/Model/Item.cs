@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MVVMApp.Model
 {
-    public class Item : INotifyPropertyChanged
+    public class Item : INotifyPropertyChanged, IDataErrorInfo
     {
         #region Item Property
         /// <summary>
@@ -106,6 +106,28 @@ namespace MVVMApp.Model
             }
         }
 
+        #endregion
+
+        #region Validation
+        public bool IsValid
+        {
+            get
+            {
+                if (String.IsNullOrWhiteSpace(Quantity.ToString()) || this == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        #endregion
+
+        #region IDataErrorInfo Members
+        public string Error => throw new NotImplementedException();
+
+        public string this[string columnName] => throw new NotImplementedException();
         #endregion
 
     }

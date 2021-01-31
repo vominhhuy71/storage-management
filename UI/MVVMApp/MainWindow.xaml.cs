@@ -24,12 +24,12 @@ namespace MVVMApp
         public MainWindow()
         {
             InitializeComponent();
-            MVVMApp.ViewModel.ItemViewModel itemObject = new ItemViewModel();
-            lv_Items.ItemsSource = itemObject.Items;
+            DataContext = new ItemViewModel();
         }
         private void lvItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             e.Handled = true;
         }
+
     }
 }
