@@ -1,0 +1,28 @@
+﻿<Window x:Class="MVVMApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMApp"
+        xmlns:vm ="clr-namespace:MVVMApp.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="813.863">
+    <Window.DataContext>
+        <vm:ItemViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <ListView HorizontalAlignment="Stretch" Height="316" Margin="15,10,4.8,0" VerticalAlignment="Top" Width="770" IsSynchronizedWithCurrentItem="False" Cursor="Hand" SelectionChanged="lvItems_SelectionChanged" x:Name="lv_Items">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Quantity" Width="150" DisplayMemberBinding="{Binding Quantity}"/>
+                        <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <Button Margin="641,378,52,9.6" Content="Update" RenderTransformOrigin="0.218,0.63"/>
+    </Grid>
+</Window>
