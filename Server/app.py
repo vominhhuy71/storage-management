@@ -22,13 +22,14 @@ def fetch_data():
     for member in list:
         item = {
             'id': member[0],
-            'name': member[1],
+            'itemName': member[1],
             'quantity': member[2],
             'unit': member[3]
         }
         items.append(item)    
     return items
     
+
 #GET items
 @app.route('/strgv1/get/all',methods = ['GET'])
 def get_all():
@@ -39,7 +40,7 @@ def get_all():
 #INSERT item
 @app.route('/strgv1/new',methods=['POST'])
 def insert_item():
-    if not request.json or not 'name' in request.json:
+    if not request.json or not 'itemName' in request.json:
         abort(400)
     if not request.json or not 'quantity' in request.json:
         abort(400)
@@ -47,37 +48,37 @@ def insert_item():
         abort(400)
         
     item = {
-        'name':request.json['name'],
-        'quantity': request.json['quantity'],
-        'unit': request.json['unit']
+        'itemName':request.json['ItemName'],
+        'quantity': request.json['Quantity'],
+        'unit': request.json['Unit']
     }
     cursor = mydb.cursor()
     sql = "INSERT INTO items (name,quantity,unit) VALUES (%s,%s)"
     val = (item.name,item.quantity,item.unit)
     cursor.execute(sql,val)
     mydb.commit()
-    return 200
+    return jsonify({"status":"ok"}),200
     
 #UPDATE existing item
 @app.route('/strgv1/update',methods=['PUT'])
 def update_item():
-    if not request.json or not 'name' in request.json:
+    if not request.json or not 'ItemName' in request.json:
         abort(400)
-    if not request.json or not 'quantity' in request.json:
+    if not request.json or not 'Quantity' in request.json:
         abort(400)
-    if 'quantity' in request.json and type(request.json['quantity']) is not int:
+    if 'Quantity' in request.json and type(request.json['Quantity']) is not int:
         abort(400)
-    name = request.json['name']
-    quantity = request.json['quantity']
+    name = request.json['ItemName']
+    quantity = request.json['Quantity']
     #unit = request.json['unit']
-    items = fetchall()
+    items = fetch_data()
     for item in items:
-        if item[1] == name:
+        if item['itemName'] == name:
             cursor = mydb.cursor()
             sql = "UPDATE items SET quantity = {} WHERE name = '{}' ".format(quantity,name)
             cursor.execute(sql)
             mydb.commit()
-            return 200
+            return jsonify({"status":"ok"}),200
         else:
             abort(400)
             
@@ -88,7 +89,7 @@ def delete_item(id):
     sql = "DELETE FROM items WHERE id = {}".format(id)
     cursor.execute(sql)
     mydb.commit()
-    return 200
+    return jsonify({"status":"ok"}),200
     
 if __name__ == '__main__':
 
