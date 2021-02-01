@@ -58,7 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\ItemUpdateCommand.cs" />
+    <Compile Include="DataAccess\ItemsRepos.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\ItemViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
