@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace MVVMApp.DataAccess
     {
         #region Fields
 
-        readonly List<Item> _Items;
+        protected List<Item> _Items;
 
         #endregion
 
@@ -30,26 +31,19 @@ namespace MVVMApp.DataAccess
         #region Contructor
         public ItemsRepos()
         {
-            Task<HttpResponseMessage> task = LoadData();
-            if (task.IsCompleted)
-            {
-                HttpResponseMessage response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseString = response.Content.ReadAsStringAsync().Result;
-                    _Items = JsonConvert.DeserializeObject<List<Item>>(responseString);
-                }
-            }
+            _Items = LoadContent();
             
         }
         #endregion
 
         #region LoadContent
 
-        public async Task<HttpResponseMessage>  LoadData()
+        public List<Item> LoadContent()
         {
-            HttpClient client = new HttpClient();
-            return await client.GetAsync("http://localhost:5000/strgv1/get/all");           
+            var client = new WebClient();
+            string response = client.DownloadString("http://localhost:5000/strgv1/get/all");
+            List<Item> items = JsonConvert.DeserializeObject<List<Item>>(response);
+            return items;
         }
         #endregion
 
