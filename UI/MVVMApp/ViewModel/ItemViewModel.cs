@@ -6,17 +6,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text;
 using System.Windows.Input;
 
 namespace MVVMApp.ViewModel
 {
-    public class ItemViewModel
+    public class ItemViewModel : ViewModelBase
     {
         #region Property
 
         private List<Item> _Items;
-        private Item _Item;
         public bool _IsSelected;
+        protected Item _SelectedItem;
+
         public ItemViewModel()
         {
             //List<Item> items = new List<Item>();
@@ -26,7 +28,6 @@ namespace MVVMApp.ViewModel
 
             ItemsRepos items = new ItemsRepos();
             _Items = items.Items;
-
         }
         RelayCommand _UpdateCommand;
         public ICommand UpdateCommand
@@ -43,17 +44,19 @@ namespace MVVMApp.ViewModel
             }
         }
 
-        public Item Item
+        public Item SelectedItem
         {
             get
             {
-                return _Item;
+                return _SelectedItem;
             }
-
+            set
+            {
+                _SelectedItem = value;
+                base.OnPropertyChanged("SelectedItem");
+            }
         }
-        
-        public Item SelectedItem { get; set; }
-        
+
         public List<Item> Items
         {
             get
@@ -77,10 +80,26 @@ namespace MVVMApp.ViewModel
         }
         #endregion
 
-        #region Public Methods Debug
+        #region Public Methods
         public void Update()
         {
-            Debug.Assert(false, String.Format("{0} was updated", SelectedItem.ItemName));
+            HttpClient client = new HttpClient();
+            var requestString = JsonConvert.SerializeObject(_SelectedItem);
+            var httpContent = new StringContent(requestString, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = client.PutAsync("http://localhost:5000/strgv1/update", httpContent).Result;
+            Console.WriteLine(requestString);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                Debug.Assert(false, String.Format("{0} was updated", _SelectedItem.ItemName));
+                foreach (var item in _Items)
+                {
+                    if (item.ItemName == _SelectedItem.ItemName)
+                    {
+                        item.Quantity = _SelectedItem.Quantity;
+                    }
+                }
+            }
+            
         }
 
         #endregion

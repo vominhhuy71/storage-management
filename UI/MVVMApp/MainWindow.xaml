@@ -27,7 +27,7 @@
         </StackPanel>
         <Button Command="{Binding UpdateCommand}"  Margin="669,139,24.2,248" Content="Update" RenderTransformOrigin="0.218,0.63"/>
         <TextBox BorderThickness="0"  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,52,0,0" TextWrapping="Wrap" Text="{Binding ElementName=lv_Items, Path=SelectedItem.ItemName}" VerticalAlignment="Top" Width="263" IsReadOnly="True" />
-        <TextBox FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,96,0,0" TextWrapping="Wrap" Text="{Binding ElementName=lv_Items,Path=SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="263"/>
+        <TextBox FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,96,0,0" TextWrapping="Wrap" Text="{Binding ElementName=lv_Items,Path=SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="263"/>
         <Label FontSize="15" Margin="0,96,721.2,286" Content="Quantity:"/>
         <Label FontSize="15" Margin="0,140,721.2,242" Content="Unit:"/>
         <TextBox BorderThickness="0"  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,140,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Unit, ElementName=lv_Items}" VerticalAlignment="Top" Width="263" IsReadOnly="True" />
