@@ -48,6 +48,11 @@ namespace MVVMApp.Model
             }
         }
 
+        public static Item NewItem()
+        {
+            return new Item();
+        }
+
         /// <summary>
         /// Get/set Item's Quantity
         /// </summary>

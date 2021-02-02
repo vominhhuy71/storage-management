@@ -1,4 +1,6 @@
-﻿using MVVMApp.ViewModel;
+﻿using MVVMApp.Model;
+using MVVMApp.View;
+using MVVMApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,12 +24,14 @@ namespace MVVMApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ItemViewModel viewModel { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ItemViewModel();
+            viewModel= new ItemViewModel();
+            DataContext = viewModel;
             UpdateGrid.Visibility = Visibility.Hidden;
-            AddGrid.Visibility = Visibility.Hidden;
+            AddUC.Visibility = Visibility.Hidden;
         }
         private void lvItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -36,13 +40,29 @@ namespace MVVMApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (AddUC.Visibility == Visibility.Hidden)
+            {
+                UpdateGrid.Visibility = Visibility.Hidden;
+                UpdateButton.Visibility = Visibility.Visible;
+                AddButton.Visibility = Visibility.Visible;
+                AddUC.Visibility = Visibility.Visible;
+
+            }
+            
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
             if (UpdateGrid.Visibility == Visibility.Hidden)
             {
                 UpdateGrid.Visibility = Visibility.Visible;
-                UpdateButton.Visibility = Visibility.Hidden;
-                AddButton.Visibility = Visibility.Hidden;
-                AddGrid.Visibility = Visibility.Hidden;
-                
+                UpdateButton.Visibility = Visibility.Visible;
+                AddButton.Visibility = Visibility.Visible;
+                AddUC.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                UpdateGrid.Visibility = Visibility.Hidden;
             }
         }
 
@@ -54,33 +74,22 @@ namespace MVVMApp
                 UpdateButton.Visibility = Visibility.Visible;
                 AddButton.Visibility = Visibility.Visible;
                 
-                AddGrid.Visibility = Visibility.Hidden;
             }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (AddGrid.Visibility == Visibility.Hidden)
+            if (AddUC.Visibility==Visibility.Hidden)
             {
-                AddGrid.Visibility = Visibility.Visible;
-                UpdateButton.Visibility = Visibility.Hidden;
-                AddButton.Visibility = Visibility.Hidden;
-                
+                AddUC.Visibility = Visibility.Visible;
                 UpdateGrid.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            if (AddGrid.Visibility == Visibility.Visible)
-            {
-                AddGrid.Visibility = Visibility.Hidden;
                 UpdateButton.Visibility = Visibility.Visible;
                 AddButton.Visibility = Visibility.Visible;
-                
-                UpdateGrid.Visibility = Visibility.Hidden;
             }
-            ItemViewModel itemViewModel = new ItemViewModel();
+            else
+            {
+                AddUC.Visibility = Visibility.Hidden;
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -90,33 +99,10 @@ namespace MVVMApp
                 UpdateGrid.Visibility = Visibility.Hidden;
                 UpdateButton.Visibility = Visibility.Visible;
                 AddButton.Visibility = Visibility.Visible;
-
-                AddGrid.Visibility = Visibility.Hidden;
             }
         }
 
-        private void Return1(object sender, RoutedEventArgs e)
-        {
-            if (UpdateGrid.Visibility == Visibility.Visible)
-            {
-                UpdateGrid.Visibility = Visibility.Hidden;
-                UpdateButton.Visibility = Visibility.Visible;
-                AddButton.Visibility = Visibility.Visible;               
-                AddGrid.Visibility = Visibility.Hidden;
-            }
-        }
 
-        private void Return2(object sender, RoutedEventArgs e)
-        {
-            if (AddGrid.Visibility == Visibility.Visible)
-            {
-                AddGrid.Visibility = Visibility.Hidden;
-                UpdateButton.Visibility = Visibility.Visible;
-                AddButton.Visibility = Visibility.Visible;
-
-                UpdateGrid.Visibility = Visibility.Hidden;
-            }
-        }
     }
 
 }

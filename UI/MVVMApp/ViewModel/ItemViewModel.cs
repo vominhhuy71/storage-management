@@ -38,6 +38,7 @@ namespace MVVMApp.ViewModel
             _Items = ob_items;
             _Item = new Item();
         }
+
         RelayCommand _UpdateCommand;
         public ICommand UpdateCommand
         {
@@ -109,6 +110,14 @@ namespace MVVMApp.ViewModel
             }
         }
 
+        public Item Item
+        {
+            get
+            {
+                return _Item;
+            }
+        }
+
         /// <summary>
         /// Check if item can be updated
         /// </summary>
@@ -151,7 +160,10 @@ namespace MVVMApp.ViewModel
                     {
                         return false;
                     }
-                    
+                    else if (string.IsNullOrWhiteSpace(_Item.ItemName))
+                    {
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -212,8 +224,7 @@ namespace MVVMApp.ViewModel
             
         }
         public void Add()
-        {
-            
+        {            
             HttpClient client = new HttpClient();
             var requestString = JsonConvert.SerializeObject(_Item);
             var httpContent = new StringContent(requestString, Encoding.UTF8, "application/json");
@@ -232,11 +243,9 @@ namespace MVVMApp.ViewModel
                     lastItem.Id = 0;
                 }
                 _Item.Id = lastItem.Id + 1;
-                _Items.Add(_Item);
-                
-                
+                _Items.Add(_Item);               
             }
-       
+
         }
 
 
@@ -254,6 +263,7 @@ namespace MVVMApp.ViewModel
                 _Items.Remove(SelectedItem);
             }
         }
+
 
         #endregion
 
