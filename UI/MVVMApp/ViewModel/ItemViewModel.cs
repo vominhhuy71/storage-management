@@ -63,11 +63,13 @@ namespace MVVMApp.ViewModel
                 {
                     _AddCommand = new RelayCommand(
                         o => Add(),
-                        o => CanSave);
+                        o => true);
                 }
                 return _AddCommand;
             }
         }
+
+
 
         RelayCommand _DeleteCommand;
         public ICommand DeleteCommand
@@ -195,6 +197,18 @@ namespace MVVMApp.ViewModel
                 OnPropertyChanged("Quantity");
             }
         }
+        public int Id
+        {
+            get
+            {
+                return _Item.Id;
+            }
+            set
+            {
+                _Item.Id = value;
+                OnPropertyChanged("Id");
+            }
+        }
         public string Unit
         {
             get
@@ -219,17 +233,16 @@ namespace MVVMApp.ViewModel
             Console.WriteLine(requestString);
             if (responseMessage.IsSuccessStatusCode)
             {
-                //Debug.Assert(false, String.Format("{0} was updated", _SelectedItem.ItemName));
+                Debug.Assert(false, String.Format("{0} was updated", _SelectedItem.ItemName));
             }
             
         }
         public void Add()
-        {            
+        {
             HttpClient client = new HttpClient();
             var requestString = JsonConvert.SerializeObject(_Item);
             var httpContent = new StringContent(requestString, Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = client.PostAsync("http://localhost:5000/strgv1/new", httpContent).Result;
-            Console.WriteLine(requestString);
             if (responseMessage.IsSuccessStatusCode)
             {
                 //Debug.Assert(false, String.Format("{0} was Added", _Item.ItemName));
@@ -243,11 +256,13 @@ namespace MVVMApp.ViewModel
                     lastItem.Id = 0;
                 }
                 _Item.Id = lastItem.Id + 1;
-                _Items.Add(_Item);               
+                _Items.Add(new Item(_Item.Id,_Item.ItemName,_Item.Quantity,_Item.Unit));
+                Quantity = 0;
+                ItemName = "";
+                Unit = "";
             }
 
         }
-
 
         public void Delete()
         {
@@ -264,9 +279,9 @@ namespace MVVMApp.ViewModel
             }
         }
 
-
-        #endregion
-
-
     }
+    #endregion
+
+
 }
+

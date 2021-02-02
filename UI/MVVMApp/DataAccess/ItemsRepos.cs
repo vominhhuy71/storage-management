@@ -14,7 +14,7 @@ namespace MVVMApp.DataAccess
     {
         #region Fields
 
-        protected List<Item> _Items;
+        private List<Item> _Items;
 
         #endregion
 
@@ -47,6 +47,7 @@ namespace MVVMApp.DataAccess
         #endregion
 
         #region Public Methods
+
         #endregion
 
     }

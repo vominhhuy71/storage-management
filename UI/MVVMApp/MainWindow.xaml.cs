@@ -48,7 +48,10 @@ namespace MVVMApp
                 AddUC.Visibility = Visibility.Visible;
 
             }
-            
+            else
+            {
+                AddUC.Visibility = Visibility.Hidden;
+            }
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)

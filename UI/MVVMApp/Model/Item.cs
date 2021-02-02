@@ -21,10 +21,10 @@ namespace MVVMApp.Model
         /// 
         public Item(int id, string itemName, int quantity, string unit)
         {
-            Id = id;
-            ItemName = itemName;
-            Quantity = quantity;
-            Unit = unit;
+            _Id = id;
+            _ItemName = itemName;
+            _Quantity = quantity;
+            _Unit = unit;
         }
 
         private int _Id;

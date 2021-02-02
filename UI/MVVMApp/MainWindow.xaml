@@ -7,16 +7,16 @@
         xmlns:vm ="clr-namespace:MVVMApp.ViewModel" xmlns:v="clr-namespace:MVVMApp.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="813.863">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:ItemViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Window.Resources>
         <local:IntToString x:Key="IntToString" />
     </Window.Resources>
     <Grid>
         <Grid x:Name="AddUC" Margin="0,26,0.2,-26">
             <TextBox  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="99,30,0,0" TextWrapping="Wrap" Text="{Binding Path=ItemName,  UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="263" />
-            <TextBox FontSize="15" HorizontalAlignment="Left" Height="38" Margin="99,74,0,0" TextWrapping="Wrap" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource IntToString}}" VerticalAlignment="Top" Width="263"/>
+            <TextBox FontSize="15" HorizontalAlignment="Left" Height="38" Margin="99,74,0,0" TextWrapping="Wrap" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToString}}" VerticalAlignment="Top" Width="263"/>
             <TextBox  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="99,118,0,0" TextWrapping="Wrap" Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="263"/>
             <Button Command="{Binding AddCommand}" Content="Add" HorizontalAlignment="Left" Margin="409,98,0,0" VerticalAlignment="Top" Width="75" Height="36" Click="Button_Click"/>
             <Label FontSize="15" Content="Name" HorizontalAlignment="Left" Height="38" Margin="10,30,0,0" VerticalAlignment="Top" Width="78"/>
