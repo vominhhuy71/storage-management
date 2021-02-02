@@ -37,3 +37,6 @@ E:\GitHub_Project\Storage_Management\UI\MVVMApp\obj\Debug\MVVMApp.exe
 E:\GitHub_Project\Storage_Management\UI\MVVMApp\obj\Debug\MVVMApp.pdb
 E:\GitHub_Project\Storage_Management\UI\MVVMApp\obj\Debug\View\AddItem.g.cs
 E:\GitHub_Project\Storage_Management\UI\MVVMApp\obj\Debug\View\AddItem.baml
+E:\GitHub_Project\Storage_Management\UI\MVVMApp\obj\Debug\MVVMApp.csprojAssemblyReference.cache
+E:\GitHub_Project\Storage_Management\UI\MVVMApp\obj\Debug\View\childDialog.g.cs
+E:\GitHub_Project\Storage_Management\UI\MVVMApp\obj\Debug\View\childDialog.baml

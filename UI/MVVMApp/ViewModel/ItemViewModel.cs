@@ -1,5 +1,6 @@
 ﻿using MVVMApp.DataAccess;
 using MVVMApp.Model;
+using MVVMApp.View;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,17 @@ namespace MVVMApp.ViewModel
         public bool _IsSelected;
         protected Item _SelectedItem;
         protected Item _Item;
+        /// <summary>
+        /// Display dialog
+        /// </summary>
+        private ItemInfoViewModel childModel;
         public ItemViewModel()
         {
             //ObservableCollection<Item> items = new ObservableCollection<Item>();
             //items.Add(new Item(1, "Milk", 300, "liters"));
             //items.Add(new Item(2, "Carrot", 5, "kg"));
             //items.Add(new Item(3, "Potatoes", 3, "kg"));
-
+            childModel = new ItemInfoViewModel();
             ItemsRepos _items = new ItemsRepos();
             ObservableCollection<Item> ob_items = new ObservableCollection<Item>();
             var list = _items.Items;
@@ -126,11 +131,7 @@ namespace MVVMApp.ViewModel
         public bool CanUpdate {
             get
             {
-                if (SelectedItem!=null)
-                {
-                    return true;
-                }
-                return false;
+                return SelectedItem != null ? true : false;
             }
         }
 
@@ -233,7 +234,10 @@ namespace MVVMApp.ViewModel
             Console.WriteLine(requestString);
             if (responseMessage.IsSuccessStatusCode)
             {
-                Debug.Assert(false, String.Format("{0} was updated", _SelectedItem.ItemName));
+                childDialog viewModel = new childDialog();
+                viewModel.DataContext = childModel;
+                childModel.Info = _SelectedItem.ItemName + " was updated!";
+                viewModel.ShowDialog();
             }
             
         }
@@ -255,11 +259,18 @@ namespace MVVMApp.ViewModel
                 {
                     lastItem.Id = 0;
                 }
+
+                childDialog viewModel = new childDialog();
+                viewModel.DataContext = childModel;
+                childModel.Info = _Item.ItemName + " was added!";
+                viewModel.ShowDialog();
+
                 _Item.Id = lastItem.Id + 1;
                 _Items.Add(new Item(_Item.Id,_Item.ItemName,_Item.Quantity,_Item.Unit));
                 Quantity = 0;
                 ItemName = "";
-                Unit = "";
+                Unit = "";              
+                
             }
 
         }
@@ -274,9 +285,13 @@ namespace MVVMApp.ViewModel
             Console.WriteLine(requestString);
             if (responseMessage.IsSuccessStatusCode)
             {
-                //Debug.Assert(false, String.Format("{0} was Added", _Item.ItemName));
-                _Items.Remove(SelectedItem);
+                childDialog viewModel = new childDialog();
+                viewModel.DataContext = childModel;
+                childModel.Info = _SelectedItem.ItemName + " was deleted!";
+                viewModel.ShowDialog();
+                _Items.Remove(SelectedItem);               
             }
+            
         }
 
     }
