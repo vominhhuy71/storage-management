@@ -10,9 +10,15 @@ namespace MVVMApp.Model
     public class Item : INotifyPropertyChanged
     {
         #region Item Property
+        
+        public Item()
+        {
+
+        }
         /// <summary>
         /// Initialize an instance of class Item
         /// </summary>
+        /// 
         public Item(int id, string itemName, int quantity, string unit)
         {
             Id = id;

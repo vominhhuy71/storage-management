@@ -32,7 +32,6 @@ namespace MVVMApp.DataAccess
         public ItemsRepos()
         {
             _Items = LoadContent();
-            
         }
         #endregion
 
@@ -48,27 +47,6 @@ namespace MVVMApp.DataAccess
         #endregion
 
         #region Public Methods
-
-        public void AddItem (Item _item)
-        {
-            int index = _Items.FindIndex(item => item.ItemName == _item.ItemName);
-            if (index == 0)
-            {
-                _Items.Add(_item);
-            }
-        }
-
-        public void EditItem(Item _item)
-        {
-            foreach (var item in _Items)
-            {
-                if (item.ItemName == _item.ItemName)
-                {
-                    item.Quantity = _item.Quantity;                 
-                }               
-            }
-        }
-
         #endregion
 
     }

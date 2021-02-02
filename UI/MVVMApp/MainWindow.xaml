@@ -10,11 +10,13 @@
     <Window.DataContext>
         <vm:ItemViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <local:IntToString x:Key="IntToString" />
+    </Window.Resources>
     <Grid>
-        <Label FontFamily="Ariel" FontSize="25" Margin="0,0,0.2,373">Application for storage management</Label>
-        <Label FontSize="15" Margin="0,52,744.2,330" Content="Name:"/>
+        <Label FontFamily="Ariel" FontSize="25" Margin="0,0,0.2,373" Content="Application for storage management"/>
         <StackPanel Orientation="Horizontal" Margin="-10,197,10.2,0">
-            <ListView SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemsSource="{Binding Items}" HorizontalAlignment="Stretch" Margin="15,11,4.8,10.2" Width="776" IsSynchronizedWithCurrentItem="False" Cursor="Hand" SelectionChanged="lvItems_SelectionChanged" x:Name="lv_Items">
+            <ListView Focusable="True" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemsSource="{Binding Items}" HorizontalAlignment="Stretch" Margin="15,11,4.8,10.2" Width="787" IsSynchronizedWithCurrentItem="False" Cursor="Hand" SelectionChanged="lvItems_SelectionChanged" x:Name="lv_Items">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}"/>
@@ -25,12 +27,30 @@
                 </ListView.View>
             </ListView>
         </StackPanel>
-        <Button Command="{Binding UpdateCommand}"  Margin="669,139,24.2,248" Content="Update" RenderTransformOrigin="0.218,0.63"/>
-        <TextBox BorderThickness="0"  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,52,0,0" TextWrapping="Wrap" Text="{Binding ElementName=lv_Items, Path=SelectedItem.ItemName}" VerticalAlignment="Top" Width="263" IsReadOnly="True" />
-        <TextBox FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,96,0,0" TextWrapping="Wrap" Text="{Binding ElementName=lv_Items,Path=SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Width="263"/>
-        <Label FontSize="15" Margin="0,96,721.2,286" Content="Quantity:"/>
-        <Label FontSize="15" Margin="0,140,721.2,242" Content="Unit:"/>
-        <TextBox BorderThickness="0"  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,140,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Unit, ElementName=lv_Items}" VerticalAlignment="Top" Width="263" IsReadOnly="True" />
+        <Grid Margin="0,0,0.2,0" x:Name="UpdateGrid">
+            <Label FontSize="15" Margin="0,52,744.2,330" Content="Name:"/>
 
+            <TextBox BorderThickness="0"  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,52,0,0" TextWrapping="Wrap" Text="{Binding Path=SelectedItem.ItemName}" VerticalAlignment="Top" Width="263" IsReadOnly="True" />
+            <TextBox FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,96,0,0" TextWrapping="Wrap" Text="{Binding Path=SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource IntToString}}" VerticalAlignment="Top" Width="263"/>
+            <Label FontSize="15" Margin="0,96,721.2,286" Content="Quantity:"/>
+            <Label FontSize="15" Margin="0,140,721.2,242" Content="Unit:"/>
+            <TextBox BorderThickness="0"  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,140,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Unit}" VerticalAlignment="Top" Width="263" IsReadOnly="True" />
+            <Button x:Name="DeleteButton" Content="Delete" HorizontalAlignment="Left" Margin="670,125,0,0" VerticalAlignment="Top" Width="75" Height="37" Click="DeleteButton_Click"
+                Command="{Binding DeleteCommand}"/>
+            <Button Name="Close1" Margin="761,67,10,330" Click="Return1" >X</Button>
+            <Button Command="{Binding UpdateCommand}"  Margin="590,125,142,258" Content="Update" Click="Button_Click_1" Width="75" Height="37"/>
+        </Grid>
+        <Grid Margin="0,0,0.2,0" x:Name="AddGrid">
+            <Label FontSize="15" Margin="0,52,744.2,330" Content="Name:"/>
+            <TextBox   FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,52,0,0" TextWrapping="Wrap" Text="{Binding Path=ItemName}" VerticalAlignment="Top" Width="263"/>
+            <TextBox FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,96,0,0" TextWrapping="Wrap" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource IntToString}}" VerticalAlignment="Top" Width="263"/>
+            <Label FontSize="15" Margin="0,96,721.2,286" Content="Quantity:"/>
+            <Label FontSize="15" Margin="0,140,721.2,242" Content="Unit:"/>
+            <TextBox  FontSize="15" HorizontalAlignment="Left" Height="38" Margin="91,140,0,0" TextWrapping="Wrap" Text="{Binding Unit}" VerticalAlignment="Top" Width="263"/>
+            <Button Command="{Binding AddCommand}"  Margin="383,156,310,231" Content="Add" RenderTransformOrigin="0.5,0.503" Click="Button_Click_2"/>
+            <Button Name="Close2" Margin="761,67,10,330" Click="Return2" >X</Button>
+        </Grid>
+        <Button Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="609,47,0,0" VerticalAlignment="Top" Width="91" Height="26" Click="Button_Click"/>
+        <Button Name="AddButton" Content="Add" HorizontalAlignment="Left" Margin="512,47,0,0" VerticalAlignment="Top" Width="91" Height="26" Click="AddButton_Click"/>
     </Grid>
 </Window>
