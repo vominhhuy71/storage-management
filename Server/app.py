@@ -59,25 +59,22 @@ def insert_item():
 #UPDATE existing item
 @app.route('/strgv1/update',methods=['PUT'])
 def update_item():
-    if not request.json or not 'ItemName' in request.json:
-        abort(400)
-    if not request.json or not 'Quantity' in request.json:
-        abort(400)
-    if 'Quantity' in request.json and type(request.json['Quantity']) is not int:
-        abort(400)
     name = request.json['ItemName']
     quantity = request.json['Quantity']
     #unit = request.json['unit']
     items = fetch_data()
+    found = False
     for item in items:
-        if item['itemName'] == name:
+        if item["itemName"] == name:
+            found = True
             cursor = mydb.cursor()
             sql = "UPDATE items SET quantity = {} WHERE name = '{}' ".format(quantity,name)
             cursor.execute(sql)
             mydb.commit()
-            return jsonify({"status":"ok"}),200
-        else:
-            abort(400)
+    if found == True:        
+        return jsonify({"status":"ok"}),200
+    else:
+        abort(400)
             
 #DELETE item
 @app.route('/strgv1/delete', methods = ['DELETE'])
