@@ -34,27 +34,24 @@ def fetch_data():
 @app.route('/strgv1/get/all',methods = ['GET'])
 def get_all():
     items = fetch_data()   
-    print(items)
     return jsonify(items),200
         
 #INSERT item
 @app.route('/strgv1/new',methods=['POST'])
 def insert_item():
-    if not request.json or not 'itemName' in request.json:
+    if not request.json or not 'ItemName' in request.json:
         abort(400)
-    if not request.json or not 'quantity' in request.json:
+    if not request.json or not 'Quantity' in request.json:
         abort(400)
-    if not request.json or not 'unit' in request.json:
+    if not request.json or not 'Unit' in request.json:
         abort(400)
         
-    item = {
-        'itemName':request.json['ItemName'],
-        'quantity': request.json['Quantity'],
-        'unit': request.json['Unit']
-    }
+    itemName=request.json['ItemName']
+    quantity=request.json['Quantity']
+    unit=request.json['Unit']
     cursor = mydb.cursor()
-    sql = "INSERT INTO items (name,quantity,unit) VALUES (%s,%s)"
-    val = (item.name,item.quantity,item.unit)
+    sql = "INSERT INTO items (name,quantity,unit) VALUES (%s,%s,%s)"
+    val = (itemName,quantity,unit)
     cursor.execute(sql,val)
     mydb.commit()
     return jsonify({"status":"ok"}),200
@@ -83,11 +80,21 @@ def update_item():
             abort(400)
             
 #DELETE item
-@app.route('/strgv1/delete/<int:id>', methods = ['DELETE'])
-def delete_item(id):
+@app.route('/strgv1/delete', methods = ['DELETE'])
+def delete_item():
     cursor = mydb.cursor()
-    sql = "DELETE FROM items WHERE id = {}".format(id)
+    name = request.json['ItemName']
+    sql = "DELETE FROM items WHERE name = '{}'".format(name)
     cursor.execute(sql)
+    cursor.close()
+    
+    items = fetch_data()
+    cursor = mydb.cursor()   
+    cursor.execute("TRUNCATE TABLE items")
+    for item in items:
+        sql = "INSERT INTO items (name,quantity,unit) VALUES (%s,%s,%s)"
+        val = (item["itemName"],item["quantity"],item["unit"])
+        cursor.execute(sql,val)       
     mydb.commit()
     return jsonify({"status":"ok"}),200
     
