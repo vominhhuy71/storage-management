@@ -1,0 +1,13 @@
+﻿<Window x:Class="MVVMAppv2.View.NotifyView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMAppv2.View"
+        mc:Ignorable="d"
+        Title="NotifyView" Height="223.476" Width="572.46">
+    <Grid>
+        <Label FontSize="30" Content="Data is saved/editted/deleted!" HorizontalAlignment="Left" Margin="23,33,0,0" VerticalAlignment="Top" Height="60" Width="463"/>
+
+    </Grid>
+</Window>
