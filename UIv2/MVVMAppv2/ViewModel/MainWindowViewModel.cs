@@ -19,6 +19,7 @@ namespace MVVMAppv2.ViewModel
         #region Fields
         public Item _SelectedItem;
         protected ObservableCollection<Item> _Items;
+
         #endregion
 
         #region Properties
@@ -149,7 +150,8 @@ namespace MVVMAppv2.ViewModel
             bool? result = editItem.ShowDialog();
             if (result.HasValue)
             {
-                SelectedItem = editItemViewModel.Item;
+                var tempItems = _Items;
+                Items = new ObservableCollection<Item>(tempItems);   
             }
         }
 

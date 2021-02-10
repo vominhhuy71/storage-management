@@ -16,7 +16,7 @@
             <MenuItem Header="Edit" Command="{Binding EditCommand}"></MenuItem>
             <MenuItem Header="Delete" Command="{Binding DeleteCommand}"></MenuItem>
         </Menu>
-        <ListView ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" HorizontalAlignment="Left" Height="318" Margin="0,102,-0.4,0" VerticalAlignment="Top" Width="794" SelectionChanged="ListView_SelectionChanged">
+        <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="318" Margin="0,102,-0.4,0" VerticalAlignment="Stretch" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}"/>
