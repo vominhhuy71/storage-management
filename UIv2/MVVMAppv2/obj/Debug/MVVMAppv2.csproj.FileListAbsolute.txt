@@ -22,3 +22,4 @@ E:\GitHub_Project\Storage_Management\UIv2\MVVMAppv2\obj\Debug\View\EditItem.g.cs
 E:\GitHub_Project\Storage_Management\UIv2\MVVMAppv2\obj\Debug\View\EditItem.baml
 E:\GitHub_Project\Storage_Management\UIv2\MVVMAppv2\obj\Debug\View\NotifyView.g.cs
 E:\GitHub_Project\Storage_Management\UIv2\MVVMAppv2\obj\Debug\View\NotifyView.baml
+E:\GitHub_Project\Storage_Management\UIv2\MVVMAppv2\obj\Debug\MVVMAppv2.csprojAssemblyReference.cache

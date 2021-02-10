@@ -137,15 +137,20 @@ namespace MVVMAppv2.ViewModel
         void Add()
         {
             AddItem addItem = new AddItem();
-            addItem.DataContext = new AddItemViewModel(_Items);
+            addItem.DataContext = new AddItemViewModel(_Items, addItem);
             addItem.ShowDialog();
         }
 
         void EditDialog()
         {
             EditItem editItem = new EditItem();
-            editItem.DataContext = new EditItemViewModel(_Items,_SelectedItem);
-            editItem.ShowDialog();
+            EditItemViewModel  editItemViewModel = new EditItemViewModel(_Items, _SelectedItem,editItem);
+            editItem.DataContext = editItemViewModel;
+            bool? result = editItem.ShowDialog();
+            if (result.HasValue)
+            {
+                SelectedItem = editItemViewModel.Item;
+            }
         }
 
         void Delete()

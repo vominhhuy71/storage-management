@@ -20,6 +20,7 @@ namespace MVVMAppv2.ViewModel
 
         protected ObservableCollection<Item> items;
 
+        protected AddItem addItem;
         #endregion
 
         #region Constructor
@@ -29,10 +30,11 @@ namespace MVVMAppv2.ViewModel
             item = new Item();
         }
 
-        public AddItemViewModel(ObservableCollection<Item> _items)
+        public AddItemViewModel(ObservableCollection<Item> _items, AddItem _addItem)
         {
             items = _items;
             item = new Item();
+            addItem = _addItem;
         }
         #endregion
 
@@ -141,6 +143,7 @@ namespace MVVMAppv2.ViewModel
                 notifyView.ShowDialog();
                 item.Id = lastItem.Id + 1;
                 items.Add(new Item(item.Id, item.ItemName, item.Quantity, item.Unit, item.Min));
+                addItem.Close();
             }
         }
 

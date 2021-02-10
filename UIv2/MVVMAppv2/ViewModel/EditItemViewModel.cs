@@ -20,6 +20,8 @@ namespace MVVMAppv2.ViewModel
 
         protected ObservableCollection<Item> items;
 
+        protected EditItem editItemDialog { get; set; }
+
         #endregion
 
         #region Constructor
@@ -29,10 +31,11 @@ namespace MVVMAppv2.ViewModel
             item = new Item();
         }
 
-        public EditItemViewModel(ObservableCollection<Item> _items, Item _item)
+        public EditItemViewModel(ObservableCollection<Item> _items, Item _item, EditItem editItem)
         {
             items = _items;
             item = _item;
+            editItemDialog = editItem;
         }
         #endregion
 
@@ -80,6 +83,28 @@ namespace MVVMAppv2.ViewModel
                 OnPropertyChanged("Unit");
             }
         }
+
+
+        public Item Item
+        {
+            get
+            {
+                return item;
+            }
+        }
+
+        public ObservableCollection<Item> Items
+        {
+            get
+            {
+                return items;
+            }
+            set
+            {
+                items = value;
+                OnPropertyChanged("Items");
+            }
+        }
         #endregion
 
         #region Command
@@ -120,17 +145,10 @@ namespace MVVMAppv2.ViewModel
             HttpResponseMessage responseMessage = client.PutAsync("http://localhost:5000/strgv1/update", httpContent).Result;
             if (responseMessage.IsSuccessStatusCode)
             {
-                //for (int i = 0; i < items.Count; i++)
-                //{
-                //    if (items[i].ItemName == item.ItemName)
-                //    {
-                //        items[i].Quantity = item.Quantity;
-                //        items[i].Min = item.Min;
-                //    }
-                //}
 
                 NotifyView notifyView = new NotifyView();
                 notifyView.ShowDialog();
+                editItemDialog.Close();
             }
         }
 
