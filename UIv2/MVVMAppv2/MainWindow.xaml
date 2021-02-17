@@ -11,12 +11,17 @@
         <vm:MainWindowViewModel></vm:MainWindowViewModel>
     </Window.DataContext>
     <Grid>
-        <Menu Margin="0,0,-0.4,387" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="169*"/>
+        </Grid.RowDefinitions>
+        <Menu Margin="0,0,-0.4,4" Grid.Row="0" >
             <MenuItem Header="Add" Command="{Binding AddCommand}"></MenuItem>
             <MenuItem Header="Edit" Command="{Binding EditCommand}"></MenuItem>
             <MenuItem Header="Delete" Command="{Binding DeleteCommand}"></MenuItem>
         </Menu>
-        <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" HorizontalAlignment="Stretch" Height="318" Margin="0,102,-0.4,0" VerticalAlignment="Stretch" SelectionChanged="ListView_SelectionChanged">
+        <ListView Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,8.6,-0.4,10" VerticalAlignment="Stretch" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}"/>
@@ -27,6 +32,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label FontSize="25"  Content="This application is used for managing items in storage." HorizontalAlignment="Left" Height="59" Margin="0,38,0,0" VerticalAlignment="Top" Width="751"/>
+        <Label Grid.Row="1" FontSize="25"  Content="This application is used for managing items in storage." HorizontalAlignment="Left" Height="59" Margin="10,10,0,0" VerticalAlignment="Top" Width="751" Grid.RowSpan="2"/>
     </Grid>
 </Window>
