@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MVVMAppv2" 
         xmlns:vm="clr-namespace:MVVMAppv2.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Inventory" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel></vm:MainWindowViewModel>
     </Window.DataContext>
@@ -21,7 +21,7 @@
             <MenuItem Header="Edit" Command="{Binding EditCommand}"></MenuItem>
             <MenuItem Header="Delete" Command="{Binding DeleteCommand}"></MenuItem>
         </Menu>
-        <ListView Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,8.6,-0.4,10" VerticalAlignment="Stretch" SelectionChanged="ListView_SelectionChanged">
+        <ListView Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" ItemsSource="{Binding Items, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,9,-0.4,0" VerticalAlignment="Stretch" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}"/>
@@ -32,6 +32,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Grid.Row="1" FontSize="25"  Content="This application is used for managing items in storage." HorizontalAlignment="Left" Height="59" Margin="10,10,0,0" VerticalAlignment="Top" Width="751" Grid.RowSpan="2"/>
+        <Label Grid.Row="1" FontSize="25"  Content="This application is used for managing items in storage." HorizontalAlignment="Left" Height="45" Margin="10,5,0,0" VerticalAlignment="Top" Width="751"/>
     </Grid>
 </Window>
